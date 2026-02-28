@@ -1,9 +1,0 @@
-scienceplots
-numpy 
-matplotlib 
-pandas
-scipy
-scikit-learn
-openpyxl
-Ipython
-ipykernel
