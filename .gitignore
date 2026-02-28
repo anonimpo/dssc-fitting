@@ -1,0 +1,18 @@
+# --- Python Virtual Environments ---
+venv/
+.venv/
+env/
+ENV/
+.env/
+
+# --- Compiled Python Files ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- IDE / Editor Settings ---
+.vscode/
+
+# --- Testing / Coverage ---
+testing/

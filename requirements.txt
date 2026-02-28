@@ -1,0 +1,7 @@
+scipy
+matplotlib
+pandas
+scienceplots
+lmfit           #
+numpy
+odrpack         #weighted orthogonal distance regression (ODR) solver  
