@@ -1,6 +1,7 @@
 scipy
 matplotlib
 pandas
+openpyxl
 scienceplots
 lmfit           #
 numpy
