@@ -9,7 +9,7 @@ plt.style.use(['science','no-latex','ieee'])
 e, kB = constants.e, constants.Boltzmann
 phi_0, d, T, alpha =1e16 ,8e-4 ,3e2, 5e3
 
-def extended_shockley(V, m, n_0, tau_e, D_e):#, phi_0=phi0, d=d0, T=T0, alpha=alpha0):
+def extended_shockley(V, m, n_0, tau_e, D_e, phi_0=phi_0, d=d, T=T, alpha=alpha):
     """ extended shockley equation is an shockley like's equation derive from maxwell equation?
 
     Args:
@@ -60,7 +60,7 @@ params, covs, info1, info2, info3 = optimize.curve_fit(extended_shockley,V,I,p0=
 
 
 # units are A/cm^2
-AREA = 1.0 # active area of your cell in cm^2
+AREA = 0.2 # active area of your cell in cm^2
 J_data = (I / 1000.0) / AREA # Convert mA to A/cm^2
 
 # Wrap the function to explicitly scale parameters to O(1) magnitudes
@@ -104,7 +104,7 @@ try:
     plt.xlabel("Voltage (V)")
     plt.ylabel("Current Density J (A/cm$^2$)")
     plt.legend()
-    plt.show()
+    plt.savefig("./plot.png")
     
    
 except Exception as e:
