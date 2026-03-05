@@ -11,6 +11,9 @@ __pycache__/
 *.pyo
 *.pyd
 
+# excel/libre lock files
+.~lock*
+
 # --- IDE / Editor Settings ---
 .vscode/
 
