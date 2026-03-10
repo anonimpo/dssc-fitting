@@ -12,6 +12,8 @@ def area():
 
 def parameters_value_from_reference():
     """initial guess for the parameters, from reference [diantoro 2019, IOP Conf. Series: Mater. Sci. Eng. 515 (2019) 012016]
+
+    [e, kB, phi_0, d, T, alpha, m, n_0, tau_e, D_e]
     """
     # constants
     e, kB = constants.e, constants.Boltzmann
