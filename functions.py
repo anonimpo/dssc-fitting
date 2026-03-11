@@ -24,7 +24,7 @@ def parameters_value_from_reference():
 
     return  [e, kB, phi_0, d, T, alpha, m, n_0, tau_e, D_e]
 
-def diffusion_model_shockley(V, m, n_0, tau_e, D_e):#, phi_0=phi_0, d=d, T=T, alpha=alpha):
+def diffusion_model_shockley(V, m, n_0, tau_e, D_e, phi_0): #, d=d, T=T, alpha=alpha):
     """ extended shockley equation is an shockley like's equation derive from maxwell equation?
 
     Args:
@@ -56,10 +56,26 @@ def diffusion_model_shockley(V, m, n_0, tau_e, D_e):#, phi_0=phi_0, d=d, T=T, al
     
     return j_total
 
+def diffusion_model_shockley_anchored(V, m, n_0, tau_e, D_e, J_sc_exp):
+    """
+    Fits the shape of the diffusion model by anchoring the short-circuit current 
+    to the practically measured value.
+    """
+    L = np.sqrt(D_e * tau_e)
+    # Use the known experimental Jsc instead of calculating it from phi_0
+    j_sc = J_sc_exp  
+    
+    j_0 = e * n_0 * np.sqrt(D_e / tau_e) * np.tanh(d/L)
+    j_total = j_sc - j_0 * (np.exp((e * V) / (m * kB * T)) - 1)
+    
+    return j_total
+
+
 def single_diode_shockley(V,I, n, I_0, I_L, R_s, R_sh):
     """
-    Single-diode model equation for solar cells.
+    Single-diode model (implicit) equation for solar cells.
 
+    [https://www.originlab.com/doc/Origin-Help/FitFunc-Script-Access]
     Args:
         V (float): Voltage
         I (float): Current
@@ -72,10 +88,11 @@ def single_diode_shockley(V,I, n, I_0, I_L, R_s, R_sh):
     Returns:
         I_model (float )= modeled current
     """
-    # Calculate the current using the single-diode model reference from [https://www.originlab.com/doc/Origin-Help/FitFunc-Script-Access]
+    # Calculate the current using the single-diode model
     I_model = I_L - I_0 * (np.exp((V + I * R_s) / (n * kB * T)) - 1) - (V + I * R_s) / R_sh
     
     return I_model
+
 
 def shockley_diode_residual(I, *args):
     """
